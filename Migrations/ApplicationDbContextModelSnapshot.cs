@@ -140,6 +140,9 @@ namespace FoodDeliveryApp.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
@@ -369,37 +372,52 @@ namespace FoodDeliveryApp.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HomeChefHub.Models.Chef", b =>
+            modelBuilder.Entity("FoodDeliveryApp.Models.Payment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
 
-                    b.Property<string>("Email")
+                    b.Property<decimal>("AmountPaid")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentOption")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NID")
+                    b.Property<string>("PaymentStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PaymentId");
 
-                    b.ToTable("Chefs");
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("FoodDeliveryApp.Models.Order", b =>
@@ -432,6 +450,17 @@ namespace FoodDeliveryApp.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("FoodDeliveryApp.Models.Payment", b =>
+                {
+                    b.HasOne("FoodDeliveryApp.Models.Order", "Order")
+                        .WithOne("Payment")
+                        .HasForeignKey("FoodDeliveryApp.Models.Payment", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("FoodDeliveryApp.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
@@ -440,6 +469,9 @@ namespace FoodDeliveryApp.Migrations
             modelBuilder.Entity("FoodDeliveryApp.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
+
+                    b.Navigation("Payment")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

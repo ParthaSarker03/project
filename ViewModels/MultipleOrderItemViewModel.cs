@@ -14,5 +14,7 @@
 
         // Quantity the user wishes to order (0 means not selected)
         public int Quantity { get; set; }
+        public IFormFile? ImageFile { get; set; }
+        public string? ImagePath { get; set; }
     }
 }

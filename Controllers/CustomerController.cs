@@ -35,6 +35,8 @@ namespace FoodDeliveryApp.Controllers
                 .ToList();
 
             // 3) Map items to the new view model
+           
+
             var model = new MultipleItemOrderViewModel
             {
                 Items = items.Select(i => new OrderItemViewModel
@@ -43,12 +45,14 @@ namespace FoodDeliveryApp.Controllers
                     ItemName = i.ItemName,
                     Price = i.Price,
                     IsAvailable = i.IsAvailable,
-                    Quantity = 0
+                    Quantity = 0,
+                    ImagePath = i.ImagePath
                 }).ToList()
             };
+               return View(model);
 
-            // 4) Return the view with the form
-            return View(model);
+        // 4) Return the view with the form
+
         }
 
         // POST: /Customer/PlaceOrder

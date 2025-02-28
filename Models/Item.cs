@@ -12,5 +12,6 @@ namespace FoodDeliveryApp.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         public bool IsAvailable { get; set; }
+        public string? ImagePath { get; set; } // Store the image file path
     }
 }
