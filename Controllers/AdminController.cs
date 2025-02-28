@@ -32,6 +32,50 @@ namespace FoodDeliveryApp.Controllers
             return View(items);
         }
 
+        [HttpGet]
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddProduct(AddProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string uniqueFileName = null;
+
+                if (model.ImageFile != null)
+                {
+                    string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.ImageFile.CopyToAsync(fileStream);
+                    }
+                }
+
+                var newItem = new Item
+                {
+                    ItemName = model.ItemName,
+                    Description = model.Description,
+                    Price = model.Price,
+                    IsAvailable = model.IsAvailable,
+                    ImagePath = "/images/" + uniqueFileName
+                };
+
+                _context.Items.Add(newItem);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Products");
+            }
+
+            return View(model);
+        }
+
+
         // GET: /Admin/Orders
         public IActionResult Orders()
         {
@@ -128,5 +172,69 @@ namespace FoodDeliveryApp.Controllers
             }
             return result;
         }
+        [HttpGet]
+        public IActionResult EditProduct(int id)
+        {
+            var item = _context.Items.Find(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            var model = new EditProductViewModel
+            {
+                ItemId = item.ItemId,
+                ItemName = item.ItemName,
+                Description = item.Description,
+                Price = item.Price,
+                IsAvailable = item.IsAvailable,
+                ImagePath = item.ImagePath
+            };
+
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProduct(EditProductViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var item = _context.Items.Find(model.ItemId);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            // Handle image upload if a new image is provided
+            if (model.ImageFile != null)
+            {
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.ImageFile.CopyToAsync(fileStream);
+                }
+
+                // Update the image path
+                item.ImagePath = "/images/" + uniqueFileName;
+            }
+
+            // Update other fields
+            item.ItemName = model.ItemName;
+            item.Description = model.Description;
+            item.Price = model.Price;
+            item.IsAvailable = model.IsAvailable;
+
+            _context.Items.Update(item);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Products");
+        }
+
+
     }
 }

@@ -22,5 +22,6 @@ namespace FoodDeliveryApp.Models
 
         // Navigation property to all items in this order
         public List<OrderItem> OrderItems { get; set; }
+        public Payment Payment { get; set; }
     }
 }

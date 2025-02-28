@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp.csproj": {}
+    "G:\\SD 3.2 project\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp.csproj": {}
   },
   "projects": {
-    "E:\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp.csproj": {
+    "G:\\SD 3.2 project\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp.csproj",
+        "projectUniqueName": "G:\\SD 3.2 project\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp.csproj",
         "projectName": "FoodDeliveryApp",
-        "projectPath": "E:\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "E:\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp\\obj\\",
+        "projectPath": "G:\\SD 3.2 project\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "G:\\SD 3.2 project\\FoodDeliveryApp\\FoodDeliveryApp\\FoodDeliveryApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
